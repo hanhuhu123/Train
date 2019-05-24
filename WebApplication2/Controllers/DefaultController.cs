@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebApplication2.Models;
 using Newtonsoft.Json;
 using WebApplication2.DAL;
+using PagedList;
 
 // 短信插件
 using Aliyun.Acs.Core;
@@ -92,11 +93,14 @@ namespace WebApplication2.Controllers
         /// 显示订单
         /// </summary>
         /// <returns></returns>
-        public ActionResult ShowIndent()
+        public ActionResult ShowIndent(int pageIndex = 1)
         {
             var id = Convert.ToInt32(Session["id"]);
             var list = dal.GetIndent(id);
-            return View(list);
+			var pageSize = 10;
+			var allCount = list.Count();
+			IPagedList pagedList = list.ToPagedList(pageIndex, pageSize);
+            return View(pagedList);
         }
 
         /// <summary>
