@@ -1,0 +1,561 @@
+﻿
+@{
+    Layout = "_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.js"></script>
+    
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <style>
+        .text_box {
+            width: 630px;
+            border: #ccc solid 1px;
+            border-top: none;
+            min-height: 369px;
+            background-color: #f0f0f0;
+            opacity:0.9;
+        }
+
+            .text_box > div {
+                margin: 0 30px;
+                padding: 30px 0;
+            }
+
+                .text_box > div > div {
+                    height: 46px;
+                    margin-bottom: 20px;
+                    position: relative;
+                }
+
+                    .text_box > div > div i {
+                        width: 25px;
+                        height: 22px;
+                        overflow: hidden;
+                        margin: 12px;
+                        position: absolute;
+                    }
+
+                    .text_box > div > div input {
+                        width: 400px;
+                        height: 44px;
+                        line-height: 44px;
+                        background-color: #f5f5f5;
+                        font-size: 16px;
+                        font-family: "微软雅黑";
+                        color: #333;
+                        border: #ccc solid 1px;
+                        text-indent: 44px;
+                    }
+
+            .text_box input:focus {
+                border: #f00 solid 1px;
+            }
+
+            .text_box .yzm input {
+                width: 160px;
+            }
+
+            .text_box .yzm label {
+                width: 100px;
+                text-align: center;
+                display: inline-block;
+            }
+
+            .text_box h3 {
+                overflow: hidden;
+                margin-top: 24px;
+            }
+
+                .text_box h3 a {
+                    font-size: 14px;
+                    color: #666;
+                }
+
+                    .text_box h3 a:last-child {
+                        float: right;
+                    }
+
+                    .text_box h3 a:hover {
+                        text-decoration: underline;
+                    }
+
+            #button2 {
+                display: block;
+                width: 280px;
+                height: 50px;
+                font-size: 18px;
+                color: #fff;
+                line-height: 50px;
+                text-align: center;
+                background: url(../images/btn_bg.jpg);
+                font-family: "微软雅黑";
+                margin-top: 20px;
+                cursor: pointer;
+            }
+            #Checkbox1{
+                width:25px;
+                height:25px;
+            }
+            #button1{
+                
+                width: 300px;
+                height: 50px;
+                font-size: 18px;
+                color: #fff;
+                line-height: 50px;
+                vertical-align:middle;
+                
+               background-color:chocolate;
+                font-family: "微软雅黑";
+                
+                cursor: pointer;
+            }
+                .text_box button:hover {
+                    opacity: .9;
+                }
+        /*密码安全程度*/
+        .rank-a .s1, .rank-b .s1, .rank-c .s1 {
+            background: #f00
+        }
+
+        .rank-b .s2, .rank-c .s2 {
+            background: #ff9326
+        }
+
+        .rank-c .s3 {
+            background: #91c41a
+        }
+
+        .safe-rank span {
+            display: inline-block;
+            width: 40px;
+            height: 6px;
+            overflow: hidden;
+            background: #999;
+            margin-right: 1px;
+        }
+
+        .safe-rank span {
+            display: inline-block;
+            width: 40px;
+            height: 6px;
+            overflow: hidden;
+            background: #999;
+            margin-right: 1px;
+        }
+        
+    </style>
+</head>
+
+<body>
+  
+    <div id="obj" style="        width: 100%;
+        height: 900px;
+        background-image: url('../../images/b3.jpg');
+        background-size: cover;">
+        
+
+        <div class="register_con password_con">
+            <div style="height:1000px;width:700px;padding-top:60px;">
+                <div class="text_box" style="margin-left:180%;">
+                    <p style="font-size:30px;">用户注册</p>
+                    <div>
+                        <div>
+                            <i><img src="~/images/icon01.png"></i><input id="UserName" type="text" placeholder="6-15位大小写英文、数字和下划线" onblur="ValidateUser()" maxlength="20">
+                            <span style="color:red" id="userNameSpan">*</span>
+                        </div>
+
+                        <div>
+                            <i><img src="~/images/icon02.png"></i><input type="password" placeholder="6-15位大小写英文、数字和下划线" onBlur="ValidatePwd()" onkeyup="checkPwdRank(this,'_div_password_rank','_span_password_rank')" class="inptxt w200" name="userDTO.password" id="passWord1" maxlength="20" style="color: rgb(51, 51, 51);">
+                            <span style="color:red" id="pwdSpan">*</span>
+
+
+                        </div>
+
+                        <div>
+                            <span id="_div_password_rank" class="safe-rank rank-a" title="请输入密码！">
+                                <!--危险rank-a,一般rank-b,安全rank-c-->
+                                <span class="s1"></span>
+                                <span class="s2"></span>
+                                <span class="s3"></span>
+
+                            </span>
+                            <span id="_span_password_rank">危险</span>
+                        </div>
+                        <div>
+                            <i><img src="~/images/icon02.png"></i><input type="password" id="passWord2" onBlur="Validate()" placeholder="请再次输入您的密码">
+                            <span id="pwdValidate" style="color:red">*</span>
+                        </div>
+                        <div>
+                            <i><img src="~/images/icon01.png"></i><input type="text" id="realName" placeholder="请输入您的真实姓名">
+                            <span style="color:red">*</span>
+                        </div>
+                        <div>
+                            <i><img src="~/images/icon01.png"></i><input id="idcard" type="text" placeholder="请输入您的身份证号" onblur="ValidateIdCard()">
+                            <span style="color:red" id="idcardSpan">*</span>
+                        </div>
+                        <div>
+                            <i><img src="~/images/icon04.png"></i><input type="text" id="email" placeholder="请输入您的邮箱" onblur="ValidateEmail()">
+                            <span style="color:red" id="emailSpan">*</span>
+                        </div>
+
+
+                        <div>
+                            <div>
+                                <i><img src="~/images/icon01.png" id="i"></i><input id="phone" type="text" placeholder="请输入您的手机号" onblur="ValidatePhone()">
+                                <span style="color:red" id="phoneSpan">*</span>
+
+                                @*<button id="button1"  disabled="disabled" >获取验证码</button>*@
+                            </div>
+                        </div>
+                        <div>
+                            <input id="button1" type="button" onclick="sendCode(this)" value="获取验证码" />
+                        </div>
+                        <div>
+                            验证码：
+                            <input type="text" id="id=" regist_vcodes"" style=" width: 240px;">
+                            <span style="color:red" id="yzmSpan">*</span>
+                        </div>
+                        <div>
+                            <h4>
+
+                                <input id="Checkbox1" type="checkbox" style="width:25px;height:25px;" />
+                                <a href="#">《网站服务协议》</a>
+
+                            </h4>
+                        </div>
+                        <button id="button2" onclick="Save()">注册</button>
+                    </div>
+
+                    <a href="https://localhost:44338/Default/Login" style="margin-left:350px; font-size:20px;">已有账号，去登录</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+<script>
+   
+    // menu
+$(function(){
+	var n=$(".top_menu ul .cur").index()
+	$(".top_menu ul li").mouseenter(
+		function(){
+			var z=$(this).index()
+			$(".top_menu i").stop().animate({left:(z*69)},300)
+			$(this).addClass("cur")
+			$(this).siblings().removeClass("cur")
+		}
+	)
+	$(".top_menu ul").mouseleave(
+		function(){
+			$(".top_menu ul li").eq(n).addClass("cur")
+			$(".top_menu ul li").eq(n).siblings().removeClass("cur")
+			$(".top_menu i").stop().animate({left:69},300)
+		}
+	)
+})
+
+// input icon
+$(function(){
+	$(".text_box>div>div").click(
+		function(){
+			var n=$(this).index()
+			$(".text_box div i img").eq(n).stop().animate({marginTop:-22},100)
+		}
+	)
+	$(".text_box>div input").blur(
+		function(){
+			$(".text_box div i img").stop().animate({marginTop:0},100)
+		}
+	)
+})
+
+
+$(function(){
+	if(!placeholderSupport()){   // 判断浏览器是否支持 placeholder
+	   $('[placeholder]').focus(function() {
+	       var input = $(this);
+	       if (input.val() == input.attr('placeholder')) {
+	           input.val('');
+	           input.removeClass('placeholder');
+	       }
+	   }).blur(function() {
+	       var input = $(this);
+	       if (input.val() == '' || input.val() == input.attr('placeholder')) {
+	           input.addClass('placeholder');
+	           input.val(input.attr('placeholder'));
+	       }
+	   }).blur();
+	};
+})
+function placeholderSupport() {
+   return 'placeholder' in document.createElement('input');
+}
+    //验证密码安全程度 checkPwdRank(this,'_div_password_rank','_span_password_rank') 
+ function checkPwdRank(e, a, d) {
+            var b = $(e);
+            var c = b.val();
+            if (c.length <= 6 || new RegExp("^[a-zA-Z]{6,}$").test(c) || new RegExp("^[0-9]{6,}$").test(c) || new RegExp("^[_]{6,}$").test(c)) {
+                $("#" + a).attr("title", "危险");
+                $("#" + d).html("危险");
+                $("#" + a).removeClass("rank-a");
+                $("#" + a).removeClass("rank-b");
+                $("#" + a).removeClass("rank-c");
+                $("#" + a).addClass("rank-a")
+            } else {
+                if (c.length > 6 && new RegExp("[a-zA-Z]").test(c) && new RegExp("[0-9]").test(c) && new RegExp("[_]").test(c)) {
+                    $("#" + a).attr("title", "安全");
+                    $("#" + d).html("安全");
+                    $("#" + a).removeClass("rank-a");
+                    $("#" + a).removeClass("rank-b");
+                    $("#" + a).removeClass("rank-c");
+                    $("#" + a).addClass("rank-c")
+                } else {
+                    $("#" + a).attr("title", "一般");
+                    $("#" + d).html("一般");
+                    $("#" + a).removeClass("rank-a");
+                    $("#" + a).removeClass("rank-b");
+                    $("#" + a).removeClass("rank-c");
+                    $("#" + a).addClass("rank-b")
+                }
+            }
+        }
+
+    function Validate() {
+        var pwd1 = $("#passWord1").val();
+        var pwd2 = $("#passWord2").val();
+        if (pwd1 != pwd2) {
+            $("#pwdValidate").html("两次输入的密码不一致");
+        }
+        if (pwd1 == pwd2) {
+            $("#pwdValidate").html("*");
+        }
+
+        var useName = $("#UserName").val();
+        
+
+
+
+    }
+    function ValidateIdCard() {
+        var idcard = $("#idcard").val();
+        
+        //验证身份证
+        var regIdcard = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (regIdcard.test(idcard) == false &&idcard != null) {
+            $("#idcardSpan").html("身份号码输入错误");
+
+        }
+        else if (regIdcard.test(idcard) == true) {
+            $("#idcardSpan").html("*");
+        }
+        if (idcard == "") {
+            $("#idcardSpan").html("请输入身份证号码");
+        }
+
+        }
+    function ValidateEmail() {
+        var email = $("#email").val();
+            
+        var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+        if (reg.test(email) == false && email != null) {
+            $("#emailSpan").html("邮箱输入错误");
+        }
+        
+        else if(reg.test(email) == true)
+        {
+          $("#emailSpan").html("*");
+        }
+        if (email == "") {
+            $("#emailSpan").html("请输入邮箱");
+        }
+      }
+    function ValidateUser() {
+        var reg = /^[0-9A-Za-z_]{6,15}$/;
+         var useName = $("#UserName").val();
+        if (reg.test(useName) == false && useName != null) {
+            $("#userNameSpan").html("用户名输入错误");
+        }
+
+        else if (reg.test(useName) == true)
+        {
+          $("#userNameSpan").html("*");
+        }
+        if (useName == "") {
+            $("#userNameSpan").html("请输入用户名");
+        }
+    }
+    function ValidatePwd() {
+        var pwd1 = $("#passWord1").val();
+        var reg = /^[0-9A-Za-z_]{6,15}$/;
+        if (reg.test(pwd1) == false && pwd1 != null) {
+            $("#pwdSpan").html("密码格式输入错误");
+        }
+
+        else if (reg.test(pwd1) == true)
+        {
+          $("#pwdSpan").html("*");
+        }
+        if (pwd1 == "") {
+            $("#pwdSpan").html("请输入密码");
+        }
+    }
+    function ValidatePhone() {
+        var phone = $("#phone").val();
+        var reg = /^1[34578]\d{9}$/;
+        if (reg.test(phone) == false && phone != null) {
+            $("#phoneSpan").html("手机号输入错误");
+        }
+
+        else if (reg.test(phone) == true)
+        {
+            $("#phoneSpan").html("*");
+            //$("#button1").attr("disabled", false);
+        }
+        if (phone == "") {
+            $("#phoneSpan").html("请输入手机号");
+            
+        }
+        }
+    function Save() {
+        var useName = $("#UserName").val();
+        var pwd1 = $("#passWord1").val();
+        var Uname = $("#realName").val();
+        var idCard = $("#idcard").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
+        if (useName == "" || pwd1 == "" || Uname == "" || idCard == "" || email == "" || phone == "") {
+            alert("请完善用户信息");
+            return;
+        }
+        if ($("#userNameSpan").html() != "*" || $("#pwdValidate").html() != "*" ||   $("#phoneSpan").html() != "*" ||   $("#pwdSpan").html() != "*" ||   $("#emailSpan").html() != "*" ||   $("#idcardSpan").html()!="*") {
+            alert("请输入正确格式的信息");
+            return;
+        }
+        var obj = {};
+        obj.RegisterName = useName;
+        obj.RegisterPwd = pwd1;
+        obj.Uname = Uname;
+        obj.IdCard = idCard;
+        obj.Email = email;
+        obj.Phone = phone;
+         
+        $.ajax({
+            url: "https://localhost:44394/api/Default/AddRegister?r=" + JSON.stringify(obj),
+            type: "post",
+            success: function (data) {
+                var check = $("#Checkbox1").prop("checked");
+                if (data > 0 && check == true && codeState == true) {
+                    alert("注册成功");
+                }
+                else if (data > 0 && check == false) {
+                    alert("必须同意协议才能注册");
+                }
+                else if (codeState == false)
+                {
+                    alert("手机验证码输入错误");
+                }
+                else {
+                    alert("注册失败，请输入正确的信息格式");
+                }
+            }
+           
+        })
+    }
+
+    //$(function () {
+    //    var curIndex = 0;
+    //    //时间间隔(单位毫秒)，每秒钟显示一张，数组共有5张图片放在Photos文件夹下。 
+				//	var timeInterval=3000; 
+				//	var arr=new Array(); 
+				//	arr[0]="/images/b1.png"; 
+				//	arr[1]="/images/b2.jpg"; 
+				//	arr[2]="/images/b3.jpg"; 
+				//	arr[3]="/images/b4.png"; 
+				//	setInterval(changeImg,timeInterval); 
+                  
+				//	function changeImg() 
+				//	{ 
+				//		var obj=document.getElementById("obj"); 
+				//		if (curIndex==arr.length-1)  
+				//		{ 
+				//			curIndex=0; 
+				//		} 
+				//		else 
+				//		{ 
+				//			curIndex+=1; 
+    //                    }
+    //                    // $("#obj").attr("src",arr[curIndex]);
+    //                    $("#obj").css({"background-image":"url('../.."+arr[curIndex]   +"')","background-size":"cover"});
+    //                    //obj.style.backgroundImage = url('../..' + arr[curIndex]);
+				//	} 
+				
+				//	var urlStr = window.location.href;
+    //if (urlStr.indexOf("?") >= 0) {
+    //    var parm = urlStr.split("?");
+    //    alert(parm[1]);
+    //}
+    //})
+
+        
+
+
+     var clock = '';
+        var nums = 30;
+        var btn;
+    function sendCode(thisBtn) {
+            var phone = $("#phone").val();
+            $.ajax({
+                url: "/Default/SendMsM",
+                type: "get",
+                data: { phone: phone },
+                success: function (data) {
+                    console.log(data);
+                }
+            })
+            btn = thisBtn;
+            btn.disabled = true; //将按钮置为不可点击
+            btn.value = '重新获取（' + nums + '）';
+            clock = setInterval(doLoop, 1000); //一秒执行一次
+        }
+     function doLoop() {
+            nums--;
+            if (nums > 0) {
+                btn.value = '重新获取（' + nums + '）';
+            } else {
+                clearInterval(clock); //清除js定时器
+                btn.disabled = false;
+                btn.value = '点击发送验证码';
+                nums = 10; //重置时间
+            }
+    }
+    var codeState = false;
+    var num = $("#regist_vcode").val();
+            $.ajax({
+
+                url: "/Default/Compto",
+                type: "post",
+                data: { num: num },
+                success: function (data) {
+                    if (data != 1) {
+                        $("#yzmSpan").html("您的验证码输入有误,请检查后再次输入");
+                        codeState = false;
+                    }
+                    else {
+                        codeState = true;
+                    }
+                }
+            })
+</script>

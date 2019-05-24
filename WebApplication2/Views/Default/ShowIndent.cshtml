@@ -1,0 +1,164 @@
+﻿
+@{
+     Layout = "~/Views/Default/_LayoutPage2.cshtml";
+}
+@model List<WebApplication2.DAL.Indent>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowIndent</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/layer/layer.js"></script>
+
+</head>
+<body>
+    <input id="hidden" type="hidden" value="@Session["id"]"/>
+    <div>
+        <div style="margin-bottom:30px;">
+            <input id="Button1" type="button" value="删除订单" onclick="Del()" class="btn btn-danger" style="margin-left:20px;" />
+        </div>
+        <div>
+            <table class="table table-bordered">
+                <tr>
+                    <th><input id="Checkbox1" class="ckall" type="checkbox" /></th>
+                    <th>车次信息</th>
+                    <th>旅客信息</th>
+                    <th>席位信息</th>
+                    <th>车票状态</th>
+                    <th>操作</th>
+                </tr>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><input id="Checkbox1" class="ckchild" type="checkbox" value="@item.Id" /></td>
+                            <td>
+                                <div>@item.Station -> @item.Endstation  @item.Trainno</div>
+                                <div>@item.Startdate  @item.Departuretime 开</div>
+                            </td>
+                            <td>
+                                <div>@item.Name</div>
+                                <div>中国居民身份证</div>
+                            </td>
+                            <td>
+                                <div>@item.ZuoWei</div>
+                                <div></div>
+                            </td>
+                            <td>
+                                <div>@item.IndentState</div>
+                                <div></div>
+                            </td>
+                            <td>
+                                @if (item.IndentState == "已支付")
+                                {
+                                    <input id="Button1" type="button" onclick="Gai(@item.Id)" class="btn btn-link" value="改签" />
+                                    <input id="Button1" type="button" onclick="DelTicket(@item.Id)" class="btn btn-link" value="退票" />
+                                    <input id="Button1" type="button" value="查看订单" onclick="ChaKan(@item.Id)" class="btn btn-warning" style="margin-left:20px;" />
+
+                                }
+                                else
+                                {
+
+                                    <input id="Button1" type="button" disabled="disabled" onclick="Gai(@item.Id)" class="btn btn-link" value="改签" />
+                                    <input id="Button1" type="button" disabled="disabled" onclick="DelTicket(@item.Id)" class="btn btn-link" value="退票" />
+                                    <input id="Button1" type="button" value="查看订单" onclick="ChaKan(@item.Id)" class="btn btn-warning" style="margin-left:20px;" />
+
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+	$(function () {
+		Fan();
+	})
+
+	function Fan() {
+		$(".ckall").click(function () {
+			if ($(".ckall").prop("checked")) {
+				$(".ckchild").prop("checked", true);
+			}
+			else {
+				$(".ckchild").each(function () {
+					this.checked = !this.checked;
+				})
+			}
+		})
+    } 
+
+    function Gai(id) {
+        $.ajax({
+            url: "/Default/DelIndent?ids=" + id.toString(),
+            type: "get",
+            success: function (data) {
+                if (data > 0) {
+                    location.href = "/Default/Train";
+                }
+            }
+        })
+    }
+
+	function Del() {
+		var ids = [];
+
+		$(".ckchild").each(function () {
+			if (this.checked) {
+				ids.push(this.value);
+			}
+		})
+
+		if (ids.length == 0) {
+			alert("请至少选择一条数据！");
+		}
+
+
+		if (confirm("确认删除吗？")) {
+			$.ajax({
+				url: "/Default/DelIndent?ids=" + ids.toString(),
+				type: "get",
+				success: function (data) {
+					if (data > 0) {
+						alert("删除成功!");
+						location.href = "/Default/ShowIndent";
+					}
+				}
+			})
+		}
+	}
+
+
+   function ChaKan(id) {
+        layer.open({
+            type: 2,
+            area: ['1000px', '460px'],
+            shadeClose: true, //点击遮罩关闭
+            content: '/Default/ChaKanIndent?id=' + id
+        });
+        };
+
+    function DelTicket(id) {
+        layer.open({
+            type: 2,
+            area: ['1000px', '460px'],
+            shadeClose: true, //点击遮罩关闭
+            content: '/Default/DelTicket?id=' + id,
+        });
+        };
+
+</script>
+
+
+
+

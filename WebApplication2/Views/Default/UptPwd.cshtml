@@ -1,0 +1,278 @@
+﻿
+@{
+    Layout = "_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UptPwd</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.js"></script>
+    <!--图标样式-->
+    <link href="https://cdn.bootcss.com/font-awesome/5.7.2/css/all.min.css" rel="stylesheet">
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/disk/slidercaptcha.css" rel="stylesheet" />
+    <script src="~/Content/Join.js"></script>
+
+    <style>
+
+        /*滑块验证*/
+        .slidercaptcha {
+            margin: 0 auto;
+            width: 314px;
+            height: 286px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.125);
+            margin-top: 40px;
+        }
+
+            .slidercaptcha .card-body {
+                padding: 1rem;
+            }
+
+            .slidercaptcha canvas:first-child {
+                border-radius: 4px;
+                border: 1px solid #e6e8eb;
+            }
+
+            .slidercaptcha.card .card-header {
+                background-image: none;
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+
+        .refreshIcon {
+            top: -54px;
+        }
+
+
+        .text_box {
+            width: 630px;
+            border: #ccc solid 1px;
+            border-top: none;
+            min-height: 369px;
+            background-color: #f0f0f0;
+            opacity: 0.9;
+        }
+
+            .text_box > div {
+                margin: 0 30px;
+                padding: 30px 0;
+            }
+
+                .text_box > div > div {
+                    height: 46px;
+                    margin-bottom: 20px;
+                    position: relative;
+                }
+
+                    .text_box > div > div i {
+                        width: 25px;
+                        height: 22px;
+                        overflow: hidden;
+                        margin: 12px;
+                        position: absolute;
+                    }
+
+                    .text_box > div > div input {
+                        width: 400px;
+                        height: 44px;
+                        line-height: 44px;
+                        background-color: #f5f5f5;
+                        font-size: 16px;
+                        font-family: "微软雅黑";
+                        color: #333;
+                        border: #ccc solid 1px;
+                        text-indent: 44px;
+                    }
+
+            .text_box input:focus {
+                border: #f00 solid 1px;
+            }
+
+            .text_box .yzm input {
+                width: 160px;
+            }
+
+            .text_box .yzm label {
+                width: 100px;
+                text-align: center;
+                display: inline-block;
+            }
+
+            .text_box h3 {
+                overflow: hidden;
+                margin-top: 24px;
+            }
+
+                .text_box h3 a {
+                    font-size: 14px;
+                    color: #666;
+                }
+
+                    .text_box h3 a:last-child {
+                        float: right;
+                    }
+
+                    .text_box h3 a:hover {
+                        text-decoration: underline;
+                    }
+
+        #button2 {
+            display: block;
+            width: 400px;
+            height: 50px;
+            font-size: 18px;
+            color: #fff;
+            line-height: 50px;
+            text-align: center;
+            background: url(../images/btn_bg.jpg);
+            font-family: "微软雅黑";
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        #Checkbox1 {
+            width: 25px;
+            height: 25px;
+        }
+
+        #button1 {
+            width: 300px;
+            height: 50px;
+            font-size: 18px;
+            color: #fff;
+            line-height: 50px;
+            vertical-align: middle;
+            background-color: chocolate;
+            font-family: "微软雅黑";
+            cursor: pointer;
+        }
+
+        .text_box button:hover {
+            opacity: .9;
+        }
+        /*密码安全程度*/
+        .rank-a .s1, .rank-b .s1, .rank-c .s1 {
+            background: #f00
+        }
+
+        .rank-b .s2, .rank-c .s2 {
+            background: #ff9326
+        }
+
+        .rank-c .s3 {
+            background: #91c41a
+        }
+
+        .safe-rank span {
+            display: inline-block;
+            width: 40px;
+            height: 6px;
+            overflow: hidden;
+            background: #999;
+            margin-right: 1px;
+        }
+
+        .safe-rank span {
+            display: inline-block;
+            width: 40px;
+            height: 6px;
+            overflow: hidden;
+            background: #999;
+            margin-right: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div style=" width: 100%;
+        height: 1200px;
+        background-image: url('../../images/b3.jpg');
+        background-size: cover;">
+        <div class="register_con password_con">
+            <div style="height:1000px;width:700px;padding-top:60px;">
+
+                <div class="text_box" style="margin-left:180%">
+                    <p style="font-size:30px;">修改密码</p>
+                    <div>
+                        <div>
+                            <i><img src="~/images/icon02.png"></i><input type="password" placeholder="6-15位大小写英文、数字和下划线" id="passWord1" onBlur="ValidatePwd()" >
+                            <span style="color:red" id="pwdSpan">*</span>
+
+
+                        </div>
+
+                        <div>
+                            <i><img src="~/images/icon02.png"></i><input type="password" id="passWord2" onBlur="Validate()" placeholder="请再次输入您的密码" onkeyup="checkPwdRank(this,'_div_password_rank','_span_password_rank')" class="inptxt w200" name="userDTO.password" id="passWord1" maxlength="20" style="color: rgb(51, 51, 51);">
+                            <span id="pwdValidate" style="color:red">*</span>
+                        </div>
+                        
+                        <div style="margin-top:90px;">
+
+                            <button id="button2" onclick="Save()">确认修改</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function Save() {
+        var id = location.search;
+        id = id.substr(id.indexOf("=") + 1);
+        var pwd = $("#passWord1").val();
+        $.ajax({
+            url: "https://localhost:44394/api/Default/UptPwd?pwd=" + pwd + "&id=" + id,
+            type: "post",
+            success: function (data) {
+                if (data > 0) {
+                    alert("修改成功");
+                    location.href = "/Default/Login";
+                }
+            }
+        })
+    }
+
+    function ValidatePwd() {
+        var pwd1 = $("#passWord1").val();
+        var reg = /^[0-9A-Za-z_]{6,15}$/;
+        if (reg.test(pwd1) == false && pwd1 != null) {
+            $("#pwdSpan").html("密码格式输入错误");
+        }
+
+        else if (reg.test(pwd1) == true)
+        {
+          $("#pwdSpan").html("*");
+        }
+        if (pwd1 == "") {
+            $("#pwdSpan").html("请输入密码");
+        }
+    }
+        //验证密码安全程度 checkPwdRank(this,'_div_password_rank','_span_password_rank') 
+
+
+  
+    function Validate() {
+        var pwd1 = $("#passWord1").val();
+        var pwd2 = $("#passWord2").val();
+        if (pwd1 != pwd2) {
+            $("#pwdValidate").html("两次输入的密码不一致");
+        }
+        if (pwd1 == pwd2) {
+            $("#pwdValidate").html("*");
+        }
+
+        var useName = $("#UserName").val();
+        
+
+
+
+    }
+</script>

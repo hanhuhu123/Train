@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null ;
+}
+@model List<WebApplication2.DAL.Indent>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ChaKanIndent</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>车次信息</th>
+                    <th>旅客信息</th>
+                    <th>席位信息</th>
+                    <th>身份证号码</th>
+                    <th>手机号</th>
+                </tr>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div>@item.Station -> @item.Endstation  @item.Trainno</div>
+                                <div>@item.Startdate  @item.Departuretime 开</div>
+                            </td>
+                            <td>
+                                <div>@item.Name</div>
+                                <div>中国居民身份证</div>
+                            </td>
+                            <td>
+                                <div>@item.ZuoWei</div>
+                                <div></div>
+                            </td>
+
+                            <td>
+                                <div>@item.IdCard</div>
+                                <div></div>
+                            </td>
+
+                            <td>
+                                <div>@item.Phone</div>
+                                <div></div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

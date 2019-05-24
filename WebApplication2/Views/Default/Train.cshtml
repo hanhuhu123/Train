@@ -1,0 +1,246 @@
+﻿@model WebApplication2.Models.Model12
+@{
+    ViewBag.Title = "Train";
+    Layout = "~/Views/Default/_LayoutPage2.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Address/My97DatePicker/WdatePicker.js"></script>
+<style>
+    /*.trabsolute {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 1400px;
+        margin-left: 250px;
+        /*background-image:url(../../Img/5507-106.jpg);
+    }*/
+
+    #div2 {
+        width: 1400px;
+        height: 100%;
+        margin-top: 50px;
+    }
+
+    #divTrain {
+    }
+
+        #divTrain th {
+            width: 35px;
+            height: 20px;
+            text-align: center;
+        }
+
+    #c1 {
+        width: 80px;
+        height: 20px;
+    }
+
+    /*#dviOne img{
+            opacity:0.5;
+        }*/
+</style>
+
+<body>
+    <div style="width:1400px;height:100%;margin:0 auto;" id="dviOne">
+
+        <div class="trabsolute">
+            <div style="width:1000px;float:left;">
+                <table class="table table-bordered" style="background-color:antiquewhite;text-align:center;">
+                    <tr>
+                        <td>出发站</td>
+                        <td>终点站</td>
+                        <td>出发日期</td>
+                    </tr>
+                    <tr>
+                        <td> @Model.result.start</td>
+                        <td> @Model.result.end</td>
+                        <td> @Model.result.date</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="divAdd" style="float:left;">
+                @using (Html.BeginForm("Train", "Default"))
+                {
+                    <table>
+                        <tr>
+                            <td><label>出发地</label></td>
+                            <td><input id="Text2" type="text" name="start" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>目的地</label></td>
+                            <td><input id="Text3" type="text" name="end" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>出发日期</label></td>
+                            <td><input id="Text1" type="text" name="date"  onclick="WdatePicker()"/></td>
+                            <td><input id="Submit1" type="submit" value="查询" class="btn btn-group"/></td>
+                        </tr>
+                    </table>
+                }
+
+                <input id="Checkbox1" type="checkbox" class="Train" value="G" name="G" />GC-高铁/城际
+                <input id="Checkbox1" type="checkbox" class="Train" value="D" />D-动车
+                <input id="Checkbox1" type="checkbox" class="Train" value="Z" />Z-直达
+                <input id="Checkbox1" type="checkbox" class="Train" value="T" />T-特快
+                <input id="Checkbox1" type="checkbox" class="Train" value="K" />K-快速
+                <input id="Checkbox1" type="checkbox" class="Train" value="Q" />其他
+
+            </div>
+
+            <div id="divTrain">
+                <table class="table table-bordered">
+                    <tr style="background-color:cornflowerblue">
+                        <th>车次</th>
+                        <th>出发站</th>
+                        <th>到达站</th>
+                        <th>出发时间</th>
+                        <th>到达时间</th>
+                        <th>历时</th>
+                        <th>用时</th>
+                        <th>出发日期</th>
+
+                        <th>商务座</th>
+                        <th>一等座</th>
+                        <th>二等座</th>
+                        <th>软座</th>
+                        <th>硬座</th>
+
+                        <th>高级软卧</th>
+                        <th>软卧</th>
+                        <th>硬卧</th>
+                        <th>无座</th>
+                        <th>备注</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="div2">
+            <table class="table table-bordered">
+                @foreach (var item in Model.result.list)
+                {
+                    <tr>
+                        <td id="c1"> @item.trainno</td>
+                        <td id="c1"> @item.station</td>
+                        <td id="c1"> @item.endstation</td>
+                        <td id="c1"> @item.departuretime</td>
+                        <td id="c1"> @item.arrivaltime</td>
+                        <td id="c1"> @item.day</td>
+                        <td id="c1"> @item.costtime</td>
+                        <td id="c1"> @item.startdate</td>
+
+                        <td id="c1">@item.numsw</td>
+                        <td id="c1">@item.numyd</td>
+                        <td id="c1">@item.numed</td>
+                        <td id="c1">@item.numrz</td>
+                        <td id="c1">@item.numyz</td>
+
+                        <td id="c1">@item.numgr</td>
+                        <td id="c1">@item.numrw</td>
+                        <td id="c1">@item.numyw</td>
+                        <td id="c1">@item.numwz</td>
+                        <td id="c1"><input id="Button1" type="button" value="预定" class="btn btn-default" onclick="AddTicket('@item.startdate','@item.trainno','@item.station','@item.endstation','@item.costtime','@item.pricesw','@item.numsw','@item.pricetd','@item.numtd','@item.pricerz','@item.numyd','@item.priceyz','@item.numed','@item.pricerz1','@item.numrz','@item.priceyz1','@item.numyz','@item.pricegr1','@item.numgr','@item.pricerw1','@item.numrw','@item.priceyw1','@item.numyw','@item.pricey2','@item.numwz','@item.numqt','@item.departuretime','@item.arrivaltime')"></td>
+                    </tr>
+                    <tr>
+                        <td id="c1">- </td>
+                        <td id="c1">- </td>
+                        <td id="c1">- </td>
+                        <td id="c1">- </td>
+                        <td id="c1">- </td>
+                        <td id="c1">- </td>
+                        <td id="c1">- </td>
+                        <td id="c1">- </td>
+                        <td id="c1">@item.pricesw </td>
+                        <td id="c1">@item.pricerz </td>
+                        <td id="c1">@item.priceyz </td>
+                        <td id="c1">@item.pricerz1 </td>
+                        <td id="c1">@item.priceyz1</td>
+
+                        <td id="c1">@item.pricegr1</td>
+                        <td id="c1">@item.pricerw1</td>
+                        <td id="c1">@item.priceyw1</td>
+                        <td id="c1">@item.pricey2</td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+    </div>
+</body>
+<script>
+    var ids = [];
+    $(".Train").click(function () {
+
+        if ($(".Train").prop("checked")) {
+            if (ids.indexOf(this.value) != -1) {
+                var i = this.value;
+                ids.pop(i);
+                var start = (@Model.result.start);
+                var end =   (@Model.result.end);
+                var data =  (@Model.result.date);
+                alert(ids);
+                location.href = "/Default/Train?start=" + start + "&end=" + end + "&ids=" + ids.toString();
+            }
+            else {
+                ids.push(this.value);
+                var start = ("@Model.result.start");
+                var end =   ("@Model.result.end");
+                var data =  ("@Model.result.date");
+                location.href = "/Default/Train?start=" + start + "&end=" + end + "&ids=" + ids.toString();
+            }
+        }
+    })
+
+    //添加列车信息到数据库
+       function AddTicket(startdate, trainno, station, endstation, costtime,pricesw,numsw,pricetd,numtd,pricerz,numyd,priceyz,numed,pricerz1,numrz, priceyz1,numyz,pricegr1,numgr,pricerw1,numrw,priceyw1,numyw,pricey2,numwz,numqt,departuretime,arrivaltime)
+        {
+
+                    var obj = {};
+                    obj.Startdate = startdate;
+                    obj.Trainno = trainno;
+                    obj.Station = station;
+                    obj.Endstation = endstation;
+                    obj.Departuretime = departuretime;
+                    obj.Arrivaltime = arrivaltime;
+                    obj.Costtime = costtime;
+                    obj.Pricesw = pricesw;
+                    obj.Numsw = numsw;
+                    obj.Pricetd = pricetd;
+                    obj.Numtd = numtd;
+                    obj.Pricerz = pricerz;
+                    obj.Numyd = numyd;
+                    obj.Priceyz = priceyz;
+                    obj.Numed = numed;
+                    obj.Pricerz1 = pricerz1;
+                    obj.Numrz = numrz;
+                    obj.Priceyz1 = priceyz1;
+                    obj.Numyz = numyz;
+                    obj.Pricegr1 = pricegr1;
+                    obj.Numgr = numgr;
+                    obj.Pricerw1 = pricerw1;
+                    obj.Numrw = numrw;
+                    obj.Priceyw1 = priceyw1;
+                    obj.Numyw = numyw;
+                    obj.Pricey2 = pricey2;
+                    obj.Numwz = numwz;
+                    obj.Numqt = numqt;
+
+                 $.ajax({
+                     url: '/Default/AddTrainCar',
+                     type: 'post',
+                     data: { tc:obj},
+                     success: function (data) {
+                         if (data > 0) {
+                             location.href = '/Default/AddTicket?Trainno=' + trainno;
+                    }
+
+                }
+            })
+
+         }
+
+
+</script>

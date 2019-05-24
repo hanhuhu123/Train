@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>中国梦想游--旅游路线页</title>
+    
+
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/common.css" rel="stylesheet" />
+    <script src="~/js/jquery-1.9.1.min.js"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+            var wweya_li = $("div.tab_menu ul li");
+            wweya_li.click(function () {
+                $(this).addClass("selected")
+                    .siblings().removeClass("selected");
+                var index = wweya_li.index(this);
+                $("div.tab_box > div")
+                    .eq(index).show(100)
+                    .siblings().hide();
+            }).hover(function () {
+                $(this).addClass("hover");
+            }, function () {
+                $(this).removeClass("hover");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="top_hw clearfix">
+        <div class="top_h clearfix">
+           <div class="top_hl"><span>欢迎来到说走就走梦想游，让你的梦想随时起航！</span> 当前登录人：<b>@Session["name"]</b></div>
+            <b style="color:red;font-weight:300;"> </b><div class="top_hr"><a href="https://localhost:44376/Default/Register">注册</a>  |  <a href="https://localhost:44376/Default/Login">登录</a>  |  <a href="#">梦想收藏</a>  |  <a href="#">设为首页</a></div>
+        </div>
+    </div>
+    <div class="head_w">
+        <div class="head_t clearfix">
+            <div class="logo"><img src="~/images/logo.jpg"></div>
+            <div class="rx_line"><img src="~/images/rx.jpg"></div>
+        </div>
+    </div>
+    <div class="mainNav clearfix">
+        <ul class="Nav_ul">
+            <li>
+                <a href="https://localhost:44376/Default/Index">首页</a>
+                <img src="~/images/nav_line.jpg" />
+            </li>
+            <li class="cur"><a href="旅游路线.html">旅游路线</a><img src="~/images/nav_line.jpg"></li>
+            <li><a href="旅游景点.html">旅游景点</a><img src="~/images/nav_line.jpg"></li>
+            <li><a href="餐饮住宿.html">餐饮住宿</a><img src="~/images/nav_line.jpg"></li>
+            <li><a href="交通路线-详情1.html">交通线路</a><img src="~/images/nav_line.jpg"></li>
+            <li><a href="旅游团购.html">旅游团购</a><img src="~/images/nav_line.jpg"></li>
+            <li><a href="地方特产.html">地方特产</a><img src="~/images/nav_line.jpg"></li>
+            <li><a href="自动生成简介.html">自动生成简介</a><img src="~/images/nav_line.jpg"></li>
+            <li><a href="团队简介-关于中国梦想游.html">团队简介</a><img src="~/images/nav_line.jpg"></li>
+            <li><a href="行程导航-详情.html">行程导航</a></li>
+        </ul>
+    </div>
+    <div style="height:1000px;width:100%">
+        @RenderBody()
+    </div>
+    <div class="footer_w">
+        <div class="footer clearfix">
+            <div class="footer_c">
+                <p>地址：中国浙江省杭州市西湖区教工路316号 &nbsp;| &nbsp;服务热线：0571-62332269 &nbsp; | &nbsp;传真：0571-62337233  备案号：0453-2xxxxxx</p>
+                <p>Copyright © 2013 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">杭州风靡网络</a></p>
+            </div>
+            <div class="f_logo"><img src="~/images/b_logo.jpg"></div>
+        </div>
+    </div>
+</body>
+</html>

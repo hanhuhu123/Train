@@ -1,0 +1,372 @@
+﻿
+@{
+    Layout = "_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ForgetPwd</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.js"></script>
+    <!--图标样式-->
+    <link href="https://cdn.bootcss.com/font-awesome/5.7.2/css/all.min.css" rel="stylesheet">
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/disk/slidercaptcha.css" rel="stylesheet" />
+    <script src="~/Content/Join.js"></script>
+
+    <style>
+
+        /*滑块验证*/
+        .slidercaptcha {
+            margin: 0 auto;
+            width: 314px;
+            height: 286px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.125);
+            margin-top: 40px;
+        }
+
+            .slidercaptcha .card-body {
+                padding: 1rem;
+            }
+
+            .slidercaptcha canvas:first-child {
+                border-radius: 4px;
+                border: 1px solid #e6e8eb;
+            }
+
+            .slidercaptcha.card .card-header {
+                background-image: none;
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+
+        .refreshIcon {
+            top: -54px;
+        }
+
+
+        .text_box {
+            width: 630px;
+            border: #ccc solid 1px;
+            border-top: none;
+            min-height: 369px;
+            background-color: #f0f0f0;
+            opacity: 0.9;
+        }
+
+            .text_box > div {
+                margin: 0 30px;
+                padding: 30px 0;
+            }
+
+                .text_box > div > div {
+                    height: 46px;
+                    margin-bottom: 20px;
+                    position: relative;
+                }
+
+                    .text_box > div > div i {
+                        width: 25px;
+                        height: 22px;
+                        overflow: hidden;
+                        margin: 12px;
+                        position: absolute;
+                    }
+
+                    .text_box > div > div input {
+                        width: 400px;
+                        height: 44px;
+                        line-height: 44px;
+                        background-color: #f5f5f5;
+                        font-size: 16px;
+                        font-family: "微软雅黑";
+                        color: #333;
+                        border: #ccc solid 1px;
+                        text-indent: 44px;
+                    }
+
+            .text_box input:focus {
+                border: #f00 solid 1px;
+            }
+
+            .text_box .yzm input {
+                width: 160px;
+            }
+
+            .text_box .yzm label {
+                width: 100px;
+                text-align: center;
+                display: inline-block;
+            }
+
+            .text_box h3 {
+                overflow: hidden;
+                margin-top: 24px;
+            }
+
+                .text_box h3 a {
+                    font-size: 14px;
+                    color: #666;
+                }
+
+                    .text_box h3 a:last-child {
+                        float: right;
+                    }
+
+                    .text_box h3 a:hover {
+                        text-decoration: underline;
+                    }
+
+        #button2 {
+            display: block;
+            width: 400px;
+            height: 50px;
+            font-size: 18px;
+            color: #fff;
+            line-height: 50px;
+            text-align: center;
+            background: url(../images/btn_bg.jpg);
+            font-family: "微软雅黑";
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        #Checkbox1 {
+            width: 25px;
+            height: 25px;
+        }
+
+        #button1 {
+            width: 300px;
+            height: 50px;
+            font-size: 18px;
+            color: #fff;
+            line-height: 50px;
+            vertical-align: middle;
+            background-color: chocolate;
+            font-family: "微软雅黑";
+            cursor: pointer;
+        }
+
+        .text_box button:hover {
+            opacity: .9;
+        }
+        /*密码安全程度*/
+        .rank-a .s1, .rank-b .s1, .rank-c .s1 {
+            background: #f00
+        }
+
+        .rank-b .s2, .rank-c .s2 {
+            background: #ff9326
+        }
+
+        .rank-c .s3 {
+            background: #91c41a
+        }
+
+        .safe-rank span {
+            display: inline-block;
+            width: 40px;
+            height: 6px;
+            overflow: hidden;
+            background: #999;
+            margin-right: 1px;
+        }
+
+        .safe-rank span {
+            display: inline-block;
+            width: 40px;
+            height: 6px;
+            overflow: hidden;
+            background: #999;
+            margin-right: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div style="        width: 100%;
+        height: 1200px;
+        background-image: url('../../images/timg.jpg');
+        background-size: cover;">
+        <div class="register_con password_con">
+            <div style="height:1000px;width:700px;padding-top:60px;">
+
+                <div class="text_box" style="margin-left:180%">
+                    <p style="font-size:30px;">邮箱找回密码</p>
+                    <div>
+                        <div>
+                            <i><img src="~/images/icon04.png"></i><input type="text" id="Email" placeholder="请输入您的邮箱" onblur="ValidateEmail()">
+                            <span style="color:red" id="emailSpan">*</span>
+                        </div>
+
+                        <div>
+                            <i><img src="~/images/icon01.png"></i><input id="idcard" type="text" placeholder="请输入您的身份证号" onblur="ValidateIdCard()">
+                            <span style="color:red" id="idcardSpan">*</span>
+                        </div>
+                        <div>
+                            <input id="YZMpablo" type="button" onclick="YzmFind()" value="获取验证码" />
+                        </div>
+                        <div>
+                            验证码：
+                            <input type="text" id="regist_vcodes" style=" width: 240px;">
+                            <span style="color:red" id="yzmSpan">*</span>
+                        </div>
+                        <div style="margin-top:90px;">
+
+                            <button id="button2" onclick="Save()">提交</button>
+                        </div>
+                    </div>
+                   
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    // menu
+    $(function () {
+        var n = $(".top_menu ul .cur").index()
+        $(".top_menu ul li").mouseenter(
+            function () {
+                var z = $(this).index()
+                $(".top_menu i").stop().animate({ left: (z * 69) }, 300)
+                $(this).addClass("cur")
+                $(this).siblings().removeClass("cur")
+            }
+        )
+        $(".top_menu ul").mouseleave(
+            function () {
+                $(".top_menu ul li").eq(n).addClass("cur")
+                $(".top_menu ul li").eq(n).siblings().removeClass("cur")
+                $(".top_menu i").stop().animate({ left: 69 }, 300)
+            }
+        )
+    })
+
+    // input icon
+    $(function () {
+        $(".text_box>div>div").click(
+            function () {
+                var n = $(this).index()
+                $(".text_box div i img").eq(n).stop().animate({ marginTop: -22 }, 100)
+            }
+        )
+        $(".text_box>div input").blur(
+            function () {
+                $(".text_box div i img").stop().animate({ marginTop: 0 }, 100)
+            }
+        )
+    })
+
+
+    $(function () {
+        if (!placeholderSupport()) {   // 判断浏览器是否支持 placeholder
+            $('[placeholder]').focus(function () {
+                var input = $(this);
+                if (input.val() == input.attr('placeholder')) {
+                    input.val('');
+                    input.removeClass('placeholder');
+                }
+            }).blur(function () {
+                var input = $(this);
+                if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                    input.addClass('placeholder');
+                    input.val(input.attr('placeholder'));
+                }
+            }).blur();
+        };
+    })
+    function placeholderSupport() {
+        return 'placeholder' in document.createElement('input');
+    }
+
+   
+    function ValidateIdCard() {
+        var idcard = $("#idcard").val();
+
+        //验证身份证
+        var regIdcard = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (regIdcard.test(idcard) == false && idcard != null) {
+            $("#idcardSpan").html("身份号码输入错误");
+
+        }
+        else if (regIdcard.test(idcard) == true) {
+            $("#idcardSpan").html("*");
+        }
+        if (idcard == "") {
+            $("#idcardSpan").html("请输入身份证号码");
+        }
+
+    }
+    function ValidateEmail() {
+        var email = $("#email").val();
+
+        var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+        if (reg.test(email) == false && email != null) {
+            $("#emailSpan").html("邮箱输入错误");
+        }
+
+        else if (reg.test(email) == true) {
+            $("#emailSpan").html("*");
+        }
+        if (email == "") {
+            $("#emailSpan").html("请输入邮箱");
+        }
+    }
+
+
+
+    var clock = '';
+    var nums = 30;
+    var btn;
+    function sendCode(thisBtn) {
+        var phone = $("#phone").val();
+        $.ajax({
+            url: "/Default/SendMsM",
+            type: "get",
+            data: { phone: phone },
+            success: function (data) {
+                console.log(data);
+            }
+        })
+        btn = thisBtn;
+        btn.disabled = true; //将按钮置为不可点击
+        btn.value = '重新获取（' + nums + '）';
+        clock = setInterval(doLoop, 1000); //一秒执行一次
+    }
+    function doLoop() {
+        nums--;
+        if (nums > 0) {
+            btn.value = '重新获取（' + nums + '）';
+        } else {
+            clearInterval(clock); //清除js定时器
+            btn.disabled = false;
+            btn.value = '点击发送验证码';
+            nums = 10; //重置时间
+        }
+    }
+    var codeState = false;
+    var num = $("#regist_vcode").val();
+    $.ajax({
+
+        url: "/Default/Compto",
+        type: "post",
+        data: { num: num },
+        success: function (data) {
+            if (data != 1) {
+                $("#yzmSpan").html("您的验证码输入有误,请检查后再次输入");
+                codeState = false;
+            }
+            else {
+                codeState = true;
+            }
+        }
+    })
+</script>

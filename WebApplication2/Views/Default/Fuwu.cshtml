@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Fuwu";
+    Layout = "~/Views/Default/_LayoutPage2.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<div style="margin-left:250px;padding-top:50px;">
+    <table>
+        <tr>
+            <th>
+                <label>请输入疑惑问题:</label>
+                <input id="Text1" type="text" />
+                <input id="Button1" type="button" value="查询" onclick="save()" class="btn btn-default" />
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <div id="id1">
+
+                </div>
+            </th>
+        </tr>
+    </table>
+</div>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    function save() {
+        var question = $("#Text1").val();
+        $.ajax({
+            url: "/Default/GetRoom",
+            type: "post",
+            data: { question: question },
+            success: function (data1) {
+                var t = JSON.parse(data1);
+                var obj = t.result;
+                $(obj).each(function () {
+                    $("#id1").append("<p>"
+                        + "类型:" + "<span>" + this.type + "</span>"
+                        + "<br/>"
+                        + "内容显示:" + "<span>" + this.content + "</span>"
+                        + "<span>" + this.relquestion + "</span>"
+                        + "</p>")
+                })
+            }
+        })
+    }
+</script>

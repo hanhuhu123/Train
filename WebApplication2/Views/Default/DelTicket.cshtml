@@ -1,0 +1,49 @@
+﻿
+@{
+     Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>DelTicket</title>
+</head>
+<body>
+    <div>
+        <h3 style="text-align:center">退票须知</h3>
+        <div>1.当退票时间距离发车时间大于15个工作日时，不收取任何费用</div>
+        <div>2.当退票时间距离发车时间小于48小时，大于24小时，扣除10%手续费</div>
+        <div>3.当退票时间距离发车时间小于24小时，扣除20%手续费</div>
+        <div><input id="Button1" type="button" value="确定" onclick="TuiPiao()" class="btn btn-primary" /><input id="Button1" class="btn btn-default" type="button" value="返回" onclick="Back()" /></div>
+    </div>
+</body>
+</html>
+<script>
+    function Back() {
+        location.href = '/Default/ShowIndent'
+    }
+
+    function TuiPiao(id) {
+        var idStr = location.search;
+        var id = idStr.substr(idStr.indexOf("=") + 1);
+        $.ajax({
+            url: '/Default/UptIndent',
+            type: 'post',
+            data: {id:id},
+            success: function (data) {
+                if (data > 0) {
+                    alert("退票成功");
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    parent.window.location.href = '/Default/ShowIndent';
+                }
+            }
+
+        })
+
+        }
+
+</script>

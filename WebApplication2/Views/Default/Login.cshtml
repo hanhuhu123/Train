@@ -1,0 +1,380 @@
+﻿
+@{
+   Layout = "_LayoutPage1.cshtml";
+}
+@model WebApplication2.Models.Register
+<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.js"></script>
+    <!--图标样式-->
+    <link href="https://cdn.bootcss.com/font-awesome/5.7.2/css/all.min.css" rel="stylesheet">
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/disk/slidercaptcha.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <style>
+
+        /*滑块验证*/
+        .slidercaptcha {
+            margin: 0 auto;
+            width: 314px;
+            height: 286px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.125);
+            margin-top: 40px;
+        }
+
+            .slidercaptcha .card-body {
+                padding: 1rem;
+            }
+
+            .slidercaptcha canvas:first-child {
+                border-radius: 4px;
+                border: 1px solid #e6e8eb;
+            }
+
+            .slidercaptcha.card .card-header {
+                background-image: none;
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+
+        .refreshIcon {
+            top: -54px;
+        }
+
+
+        .text_box {
+            width: 630px;
+            border: #ccc solid 1px;
+            border-top: none;
+            min-height: 369px;
+            background-color: #f0f0f0;
+            opacity: 1;
+        }
+
+            .text_box > div {
+                margin: 0 30px;
+                padding: 30px 0;
+            }
+
+                .text_box > div > div {
+                    height: 46px;
+                    margin-bottom: 20px;
+                    position: relative;
+                }
+
+                    .text_box > div > div i {
+                        width: 25px;
+                        height: 22px;
+                        overflow: hidden;
+                        margin: 12px;
+                        position: absolute;
+                    }
+
+                    .text_box > div > div input {
+                        width: 400px;
+                        height: 44px;
+                        line-height: 44px;
+                        background-color: #f5f5f5;
+                        font-size: 16px;
+                        font-family: "微软雅黑";
+                        color: #333;
+                        border: #ccc solid 1px;
+                        text-indent: 44px;
+                    }
+
+            .text_box input:focus {
+                border: #f00 solid 1px;
+            }
+
+            .text_box .yzm input {
+                width: 160px;
+            }
+
+            .text_box .yzm label {
+                width: 100px;
+                text-align: center;
+                display: inline-block;
+            }
+
+            .text_box h3 {
+                overflow: hidden;
+                margin-top: 24px;
+            }
+
+                .text_box h3 a {
+                    font-size: 14px;
+                    color: #666;
+                }
+
+                    .text_box h3 a:last-child {
+                        float: right;
+                    }
+
+                    .text_box h3 a:hover {
+                        text-decoration: underline;
+                    }
+
+        #button2 {
+            display: block;
+            width: 400px;
+            height: 50px;
+            font-size: 18px;
+            color: #fff;
+            line-height: 50px;
+            text-align: center;
+            background: url(../images/btn_bg.jpg);
+            font-family: "微软雅黑";
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        #Checkbox1 {
+            width: 25px;
+            height: 25px;
+        }
+
+        #button1 {
+            width: 300px;
+            height: 50px;
+            font-size: 18px;
+            color: #fff;
+            line-height: 50px;
+            vertical-align: middle;
+            background-color: chocolate;
+            font-family: "微软雅黑";
+            cursor: pointer;
+        }
+
+        .text_box button:hover {
+            opacity: .9;
+        }
+        /*密码安全程度*/
+        .rank-a .s1, .rank-b .s1, .rank-c .s1 {
+            background: #f00
+        }
+
+        .rank-b .s2, .rank-c .s2 {
+            background: #ff9326
+        }
+
+        .rank-c .s3 {
+            background: #91c41a
+        }
+
+        .safe-rank span {
+            display: inline-block;
+            width: 40px;
+            height: 6px;
+            overflow: hidden;
+            background: #999;
+            margin-right: 1px;
+        }
+
+        .safe-rank span {
+            display: inline-block;
+            width: 40px;
+            height: 6px;
+            overflow: hidden;
+            background: #999;
+            margin-right: 1px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="obj" style="        width: 100%;
+        height: 1000px;
+        background-image: url('../../images/b3.jpg');
+        background-size: cover;">
+        @using (Html.BeginForm())
+        {
+            <div class="register_con password_con">
+                <div style="height:1000px;width:700px;padding-top:60px;">
+
+                    <div class="text_box" style="margin-left:180%">
+                        <p style="font-size:30px;">用户登录</p>
+                        <div>
+                            <div>
+                                <i><img src="~/images/icon01.png"></i><input name="name" type="text" placeholder="用户名/邮箱/手机号" maxlength="20">
+                                <span style="color:red" id="userNameSpan">*</span>
+                            </div>
+
+                            <div>
+                                <i><img src="~/images/icon02.png"></i><input type="password" name="pwd" placeholder="6-15位大小写英文、数字和下划线" maxlength="20" style="color: rgb(51, 51, 51);">
+                                <span style="color:red" id="pwdSpan">*</span>
+
+
+                            </div>
+
+                            <div class="container-fluid" style="height:200px;">
+                                <div class="form-row" style="height:200px; width:400px; margin-top:-50px;">
+                                    <div class="col-12">
+                                        <div class="slidercaptcha card">
+                                            <div class="card-header">
+                                                <span>请完成安全验证</span>
+                                            </div>
+                                            <div class="card-body"><div id="captcha"></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:90px;">
+                                <input id="button2" type="submit" onclick="Login()" value="登录" />
+                                @*<button id="button2" onclick="Login()">登录</button>*@
+                            </div>
+
+                        </div>
+                        <a href="https://localhost:44338/Default/ForgetPwd" style="margin-left:250px; font-size:20px;">忘记密码</a>|
+                        <a href="https://localhost:44338/Default/Register" style="margin-left:2px; font-size:20px;">还没有账号，去注册一个</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+   
+
+    </body>
+</html>
+<script src="~/disk/longbow.slidercaptcha.js"></script>
+<script>
+   
+    var HuaState = false;
+    function Login() {
+        //var UserName = $("#UserName").val();
+        //var pwd = $("#passWord1").val();
+        //if (UserName == "" || pwd == "") {
+        //    alert("请输入登录信息");
+        //    return;
+        //}
+         if (HuaState == false) {
+             alert("请完成滑块验证");
+             return;
+                }
+        //$.ajax({
+        //    url: "https://localhost:44394/api/Default/Login",
+        //    data: { 'name': UserName, 'pwd': pwd },
+        //    type: "get",
+        //    success: function (data) {
+        //        if (data > 0 && HuaState == true) {
+        //            alert("登录成功");
+        //            $.ajax({
+        //                url: "https://localhost:44394/api/Default/GetLoginName?name=" + UserName + "&pwd=" + pwd,                        
+        //                type: "get",
+        //                dataType:"json",
+        //                success: function (n) {
+        //                    alert(n); 
+        //                    Uname = n;
+        //                    location.href = "/Default/_LayoutPage1?uname=" + Uname;
+        //                }
+        //            }) 
+
+        //           // location.href = "/Default/Index";
+        //        }
+
+        //        //else if (HuaState == false) {
+        //        //    alert("请完成滑块验证");
+        //        //}
+        //        else {
+        //            alert("用户名或密码错误");
+        //        }
+
+        //    }
+        //})
+
+
+    }
+    //滑块
+    $('#captcha').sliderCaptcha({
+        repeatIcon: 'fa fa-redo',
+        setSrc: function () {
+            return 'http://images.sdgxgz.com/Pic' + Math.round(Math.random() * 136) + '.jpg';
+        },
+        onSuccess: function () {
+            HuaState = true;
+            //alert('验证通过!');
+
+        }
+
+    });
+    // input icon
+    $(function () {
+        $(".text_box>div>div").click(
+            function () {
+                var n = $(this).index()
+                $(".text_box div i img").eq(n).stop().animate({ marginTop: -22 }, 100)
+            }
+        )
+        $(".text_box>div input").blur(
+            function () {
+                $(".text_box div i img").stop().animate({ marginTop: 0 }, 100)
+            }
+        )
+    })
+
+
+    $(function () {
+        if (!placeholderSupport()) {   // 判断浏览器是否支持 placeholder
+            $('[placeholder]').focus(function () {
+                var input = $(this);
+                if (input.val() == input.attr('placeholder')) {
+                    input.val('');
+                    input.removeClass('placeholder');
+                }
+            }).blur(function () {
+                var input = $(this);
+                if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                    input.addClass('placeholder');
+                    input.val(input.attr('placeholder'));
+                }
+            }).blur();
+        };
+    })
+    function placeholderSupport() {
+        return 'placeholder' in document.createElement('input');
+    }
+
+    //$(function () {
+    //    var curIndex = 0;
+    //    //时间间隔(单位毫秒)，每秒钟显示一张，数组共有5张图片放在Photos文件夹下。
+    //    var timeInterval = 3000;
+    //    var arr = new Array();
+    //    arr[0] = "/images/b1.png";
+    //    arr[1] = "/images/b2.jpg";
+    //    arr[2] = "/images/b3.jpg";
+    //    arr[3] = "/images/b4.png";
+    //    setInterval(changeImg, timeInterval);
+
+    //    function changeImg() {
+    //        var obj = document.getElementById("obj");
+    //        if (curIndex == arr.length - 1) {
+    //            curIndex = 0;
+    //        }
+    //        else {
+    //            curIndex += 1;
+    //        }
+    //        // $("#obj").attr("src",arr[curIndex]);
+    //        $("#obj").css({ "background-image": "url('../.." + arr[curIndex] + "')", "background-size": "cover" });
+    //        //obj.style.backgroundImage = url('../..' + arr[curIndex]);
+    //    }
+
+    //    var urlStr = window.location.href;
+    //    if (urlStr.indexOf("?") >= 0) {
+    //        var parm = urlStr.split("?");
+    //        alert(parm[1]);
+    //    }
+    //})
+
+</script>
