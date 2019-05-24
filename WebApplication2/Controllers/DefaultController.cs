@@ -287,5 +287,10 @@ namespace WebApplication2.Controllers
                 throw exp;
             }
         }
+        //团队简介
+        public ActionResult GetTuan()
+        {
+            return View();
+        }
     }
 }

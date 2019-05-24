@@ -46,11 +46,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="aliyun-net-sdk-Core">
-      <HintPath>..\..\aliyun-net-sdk-Core.dll</HintPath>
+      <HintPath>C:\Users\吕彩贤\Desktop\aliyun-net-sdk-Core.dll</HintPath>
     </Reference>
     <Reference Include="AopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\大实训\WebApplication2\WebApplication2\bin\AopSdk.dll</HintPath>
+      <HintPath>H:\学校文件资料\调用支付宝沙箱环境\alipay.trade.page.pay-DoNet-UTF-8\Bin\AopSdk.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -720,6 +720,7 @@
     <Content Include="Views\Default\MainIndex.cshtml" />
     <Content Include="Views\Default\Register.cshtml" />
     <Content Include="Views\Default\UptPwd.cshtml" />
+    <Content Include="Views\Default\GetTuan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

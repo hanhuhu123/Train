@@ -3,7 +3,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Default/_LayoutPage2.cshtml";
 }
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/css/style.css" rel="stylesheet" />
+<link href="~/Content/css/common.css" rel="stylesheet" />
 <div class="banner">
     <center>
         <img src="~/Content/images/banner01.jpg" />
@@ -94,13 +95,13 @@
         str += d.getSeconds() + '秒';
         return str;
     }
-        setInterval(function () { $('#time').html(currentTime) }, 1000);
+    setInterval(function () { $('#time').html(currentTime) }, 1000);
 
     //查询火车信息
     function fun() {
         var startStation = $("#start").val();
         var endStation = $("#end").val();
         var date = $("#date").val();
-        location.href = "/Default/Train?start=" + startStation + "&end=" + endStation + "&date=" + date + "";  
+        location.href = "/Default/Train?start=" + startStation + "&end=" + endStation + "&date=" + date + "";
     }
 </script>

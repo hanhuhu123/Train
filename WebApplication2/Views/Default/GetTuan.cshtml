@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Fuwu";
+    Layout = "~/Views/Default/_LayoutPage2.cshtml";
+}
+<!DOCTYPE html>
+<link href="~/Content/css/style.css" rel="stylesheet" />
+<link href="~/Content/css/common.css" rel="stylesheet" />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetTuan</title>
+    <script type="text/javascript">
+
+        $(function () {
+            var wweya_li = $("div.tab_menu ul li");
+            wweya_li.click(function () {
+                $(this).addClass("selected")
+                    .siblings().removeClass("selected");
+                var index = wweya_li.index(this);
+                $("div.tab_box > div")
+                    .eq(index).show(100)
+                    .siblings().hide();
+            }).hover(function () {
+                $(this).addClass("hover");
+            }, function () {
+                $(this).removeClass("hover");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="b_wrap" style="margin:0 auto;">
+        <div class="current"></div>
+        <div class="clumn_r">
+            <div class="xl_tit">关于说走就走</div>
+            <div class="fgsdt">
+                <p class="fgp3">
+                    <img src="~/Content/images/fgpic1.png" />
+                </p>
+                <p class="fgp2">
+                    中国说走就走股份有限公司（简称梦想游）成立于2019年，总部位于中国杭州工业园区，经过近十年的创业历程，公司已进入中国在线旅游的前列，也是国内具备B2B和B2C双平台的大型旅游网站。公司现有员工5余人，注册资本6000万元，业务涵盖酒店、机票、景点门票、自助旅游在线预订，旅游信息化、旅游软件开发、旅游目的地资讯及攻略等方面。公司先后获得元禾控股，腾讯集团等投资，并于2012年9月完成股份制改造。<br><br>
+                    公司先后被评为国家高新技术企业，江苏省规划布局内重点软件企业，并入选首批国家电子商务示范企业，2012年进入中国旅游研究院与中国旅游协会联合评选的“中国旅游集团20强”，位列第15名，同年“同程”注册商标被国家工商行政管理总局商标局认定为中国驰名商标。<br><br>
+                    说走就走旅游网：中国优秀的一站式旅游预订平台，网站拥有国内海量的旅游产品线，提供国内30000余家及海外100000余家酒店预订，覆盖全国所有航线的机票预订，8000余家景区门票预订，200多个城市租车预订，境内外品质旅游度假预订。提供互联网预订（www.iqsheji.cn）、手机无线预订（m.iqsheji.cn）和363X24小时电话预订（4007-xxx-777），网站秉持“有保障的低价”原则，在行业内首创“先行赔付”和“点评返奖金”等特色增值服务，成为目前中国增长速度极快的旅游预订平台。
+                </p>
+            </div>
+        </div>
+        <br style="clear:both">
+    </div>
+</body>
+</html>
